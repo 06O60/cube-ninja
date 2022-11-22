@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: "Arcade";
+    src: url('fonts/arcade_classic_2/ARCADECLASSIC.TTF');
+}
+
+:root {
+    --black: #171321;
+    --dkblue: #0d314b;
+    --plum: #400d3f;
+    --hotmag: #ff17e4;
+    --magenta: #e310cb;
+    --aqua: #86fbfb;
+    --white: #f7f8fa;
+    --dkplum: #220f22;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;/*check this*/
+
+    font-family: "Arcade", 'Arial'; /*change secondary font*/
+    color: var(--white);
+    text-align: center;
+
+    background-image:linear-gradient(var(--black) , var(--dkplum), var(--plum));
+    background-repeat:no-repeat;
+}
+
+
+/*menus
+#menu {
+ 
+}*/
+
+
+/*all buttons*/
+button {
+    background-color: var(--magenta);
+    border:none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    /*change up font*/
+}
+/*button:hover {
+
+}
+button:active {
+    
+}
