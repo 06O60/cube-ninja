@@ -5,7 +5,6 @@
     font-family: "Arcade";
     src: url('fonts/arcade_classic_2/ARCADECLASSIC.TTF');
 }
-
 :root {
     --black: #171321;
     --dkblue: #0d314b;
@@ -33,9 +32,10 @@ body {
 
 h1 {
     color: var(--aqua);
+    padding-bottom: 20%;
 }
 
-/*statistics position 
+/*statistics position */
 #stats {
     font-size: 128%;
 }
@@ -58,7 +58,9 @@ h1 {
     right: 0.4rem;
 }
 
-
+#game-over h1{
+    animation: blink 1s steps(4, start) infinite;
+}
 /*menus*/
 #menu {
     position: fixed;/*ogarnij to*/
@@ -97,4 +99,25 @@ button:active {
     color:var(--plum);
     background-color: aqua;
 }
+
+@-moz-keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-webkit-keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-o-keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
 
