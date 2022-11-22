@@ -10,7 +10,7 @@
     --black: #171321;
     --dkblue: #0d314b;
     --plum: #400d3f;
-    --hotmag: #ff17e4;
+    --hotmag:  #ff00d8;
     --magenta: #e310cb;
     --aqua: #86fbfb;
     --white: #f7f8fa;
@@ -35,6 +35,29 @@ h1 {
     color: var(--aqua);
 }
 
+/*statistics position 
+#stats {
+    font-size: 128%;
+}
+.score {
+    position: fixed;
+	top: 0.4rem;
+	left: 0.4rem;
+    text-align:left;
+}
+#timer {
+    position: fixed;
+    text-align: right;
+    top: 0.4rem;
+    right: 0.4rem;
+}
+#combo {
+    position: fixed;
+    text-align: right;
+    bottom: 0.4rem;
+    right: 0.4rem;
+}
+
 
 /*menus*/
 #menu {
@@ -51,11 +74,11 @@ h1 {
 }
 
 
-/*all buttons*/
+/*buttons*/
 button {
+    font-family: "Arcade", monospace, Arial;
     background-color: var(--magenta);
     color: white;
-    font-family: monospace;
     font-weight: bold;
 
     padding: 0.5rem;
