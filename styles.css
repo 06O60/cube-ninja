@@ -115,6 +115,18 @@ button:active {
     background-color: aqua;
 }
 
+#countdownBox {
+    color: var(--white);
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+#countdownBox h1{
+    font-family: Helvetica, sans-serif;
+    animation: animCount 8s linear ease-in;
+    font-size: 10rem;
+}
 /*blinking for game over sign*/
 @-moz-keyframes blink {
     to {
@@ -137,3 +149,12 @@ button:active {
     }
   }
 
+
+  @keyframes animCount {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(2.2);
+    }
+}
