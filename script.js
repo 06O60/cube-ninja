@@ -1,6 +1,7 @@
 var score = "0";
 var highScore = "0";
 const playButton =  document.getElementById('start');
+const gameOverButton = document.getElementById('gameOver');
 
 function showMenu(menu)
 {
@@ -20,7 +21,7 @@ function startGame()
     hideMenu(main);
     showMenu(stats);
     setTimer();
-    setInterval(()=>{hideMenu(stats); showMenu(gameOver)}, 2000 );
+    setTimeout(()=>{hideMenu(stats); showMenu(gameOver)}, 2000 );
 }
 
 
@@ -28,6 +29,11 @@ showMenu(main);
 
 playButton.addEventListener('click', () => {
     startGame();
+})
+
+gameOverButton.addEventListener('click', () => {
+    hideMenu(gameOver);
+    showMenu(main);
 })
 
 
