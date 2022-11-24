@@ -7,7 +7,9 @@ var timeLeft = 10;
 var balls = [];
 var particles = [];
 var strokes = [];
+var bombs = [];
 var animationNow = undefined;
+var maximumExplosionSize = 30;
 var mouse = {
     x : undefined,
     y : undefined,
@@ -173,13 +175,59 @@ class ball
         this.update();
     }
 }
+class bomb{
+    constructor(x,y)
+    {
+        this.siz = Math.random()*10;
+        this.speedSiz = 3;
+        this.x = x + (Math.random()-0.5)*150;
+        this.y = y + (Math.random()-0.5)*150;
+        this.mxSize = 25 + Math.round(Math.random()*100);
+        this.rgbG = Math.random()*100;
+        this.color = `rgb(255,${this.rgbG}, 0)`;
+    }
+        update()
+        {
+            console.log(this.x, ' ',this.y);
+            if(this.siz >= this.mxSize)
+            {
+                this.speedSiz *= (-1);
+                this.siz += this.speedSiz;
+            }
+            else if(this.siz + this.speedSiz > 0)
+                this.siz += this.speedSiz;
+            else 
+                this.siz = 0.2;
+
+            this.rgbG += 2.5
+             if(this.rgbG > 255)
+                this.rgbG = 255;
+            this.color = `rgb(255,${this.rgbG}, 0)`;
+        }
+        draw()
+        {
+            if(this.siz > 0)
+            {
+                c.fillStyle = this.color;
+                c.beginPath();
+                c.arc(this.x, this.y, this.siz, 0, Math.PI * 2);
+                c.fill();
+                this.update();
+            }
+        }
+}
 
 function explosion(idx)
 {
     for(var i = 0; i < balls.length; ++i)
     {
         for(var j = 0; j < 7 + ((balls[i].siz)%5); ++j)
-            particles.push(new particle(balls[i].x, balls[i].y, balls[i].color));
+        {
+            if(balls[i].isBomb == 0)
+                particles.push(new particle(balls[i].x, balls[i].y, balls[i].color));
+            else 
+                bombs.push(new bomb(balls[i].x, balls[i].y));
+        }
     }
     combo = 1;
     score -= Math.round(balls[idx].siz/10);
@@ -243,7 +291,16 @@ function renderBalls()
             particles.splice(i, 1);
             i--;
         }
+    }
 
+    for(var i = 0; i < bombs.length; ++i)
+    {
+        bombs[i].draw();
+        if(bombs[i].siz < 0.3)
+        {
+            bombs.splice(i, 1);
+            i--;
+        }
     }
 }
 function renderBallsInterval()
