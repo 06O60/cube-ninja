@@ -20,6 +20,7 @@ const gameOverButton = document.getElementById('gameOverButton');
 const timer = document.getElementById('timer');
 const canvas = document.getElementById('canvas');
 const c = canvas.getContext('2d');
+const countDown = document.getElementById('countdown');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -35,7 +36,6 @@ function hideMenu(menu)
 /*wyczyść pole gry*/
 function finishGame(){
     tn = 0;
-
     document.getElementById('final-score').innerHTML = `YOUR SCORE: ${score}`;
     showMenu(gameOver);
     hideMenu(stats);
@@ -76,7 +76,6 @@ function setTimer()
 }
 function startGame()
 {   
-    console.log(balls.length);
     score = 0;
     combo = 1;
     timeLeft = 10;
@@ -93,11 +92,13 @@ function startGame()
 function countdown()
 {
     let counter = 3;
+    countDown.innerHTML = `${counter}`;
     var intervall = setInterval(()=>{
 
         counter--;
         if(counter == 0)
         {
+            countDown.innerHTML = ``;
             if(timeLeft > 0)
             {
                 tn = 1;
@@ -107,6 +108,7 @@ function countdown()
             }
             return;
         }
+        countDown.innerHTML = `${counter}`;
     }, 1000);
 }
 //czemu szybkosc sie zwyieksza za druga gra?
@@ -260,8 +262,6 @@ function renderBallsInterval()
 function animate()
 {
     c.clearRect(0,0, innerWidth, innerHeight);
-    if(balls.length == 0)
-        console.log(particles.length);
     if(tn <= 0 && balls.length == 0 && particles.length == 0)
     {
         cancelAnimationFrame(animationNow);

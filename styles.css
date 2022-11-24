@@ -129,7 +129,7 @@ button:active {
     transform: translateX(-50%) translateY(-50%);
 }
 #countdownBox h1{
-    font-family: Helvetica, sans-serif;
+    font-family: "Arcade", Helvetica, sans-serif;
     animation: animCount 8s linear ease-in;
     font-size: 10rem;
 }
