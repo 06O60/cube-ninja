@@ -16,6 +16,9 @@
     --dkplum: #220f22;
 }
 
+html {
+    cursor: crosshair;
+}
 body {
     pointer-events: none;
     padding: 0;
@@ -37,7 +40,10 @@ h1 {
     padding-bottom: 0.5rem;
     font-size: 4rem;
 }
-
+#canvas {
+    background-color: transparent;
+    z-index: 15;
+}
 /*statistics position */
 #stats {
     font-size: 128%;
