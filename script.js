@@ -6,6 +6,7 @@ var tn = 0;//czy gra trwa
 var timeLeft = 10;
 var balls = [];
 var particles = [];
+var strokes = [];
 var animationNow = undefined;
 var mouse = {
     x : undefined,
@@ -96,7 +97,7 @@ function countdown()
     var intervall = setInterval(()=>{
 
         counter--;
-        if(counter == 0)
+        if(counter == 0 || timeLeft <= 0)
         {
             countDown.innerHTML = ``;
             if(timeLeft > 0)
@@ -104,8 +105,8 @@ function countdown()
                 tn = 1;
                 animate();
                 renderBallsInterval();
-                clearInterval(intervall);
             }
+            clearInterval(intervall);
             return;
         }
         countDown.innerHTML = `${counter}`;
@@ -269,10 +270,28 @@ function animate()
     }
 
     renderBalls();
-
+    renderMouse();
     animationNow = requestAnimationFrame(animate);
 }
+function renderMouse()
+{//fst element is the ending of stroke
+    let inc , dec, wdth = 1;
+    for (let i = 1; i < strokes.length; i++) {
+        inc = (strokes.length - i -1)/10;
+        dec = 1-inc;
+        c.strokeStyle = 'rgb(' + Math.floor(255) + ',' + Math.floor(200 - (255 * dec)) + ',' + Math.floor(200 - (255 * inc)) + ')';
+        c.lineWidth= wdth;
+        wdth+=0.75;
 
+        c.beginPath();
+        c.moveTo(strokes[i].x, strokes[i].y);
+        c.lineTo(strokes[i-1].x, strokes[i-1].y);
+        c.stroke();
+        c.closePath();
+    }
+    if (strokes.length > 10) 
+        strokes.shift();
+}
 
 //Game logic
 
@@ -283,6 +302,8 @@ playButton.addEventListener('click', () => {
 })
 gameOverButton.addEventListener('click', () => {
     hideMenu(gameOver);
+    balls = [];
+    particles = [];
     showMenu(main);
 })
 
@@ -290,24 +311,37 @@ window.addEventListener('resize', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 })
-
-
 //mouse start
+var prvX, prvY;
 window.addEventListener('mousemove', (event)=>{
-    mouse.x = event.x;
-    mouse.y = event.y;
+    if(mouse.clicked)
+    {
+        prvX = mouse.x;
+        prvY = mouse.y;
+        mouse.x = event.x;
+        mouse.y = event.y;
+        strokes.push({x: mouse.x, y: mouse.y, prx: prvX, pry: prvY});
+    }
 })
 
-window.addEventListener('mousedown', () => {
+window.addEventListener('mousedown', (event) => {
+    prvX = mouse.x;
+    prvY = mouse.y;
+    mouse.x = event.x;
+    mouse.y = event.y;
     mouse.clicked = true;
 })
 
 window.addEventListener('mouseup', () => {
+    mouse.x = 0;
+    mouse.y = 0;
     mouse.clicked = false;
+    strokes = [];
 })
 window.addEventListener('mouseout', () => {
     mouse.x = 0;
     mouse.y = 0;
+    strokes = [];
     isMouseClicked = false;
 })
 
