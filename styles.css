@@ -44,7 +44,8 @@ h1 {
     background-color: transparent;
     z-index: 15;
 }
-/*statistics position */
+
+
 #stats {
     font-size: 128%;
     opacity: 0;
@@ -75,7 +76,7 @@ h1 {
     animation: blink 1s steps(4, start) infinite;
 }
 
-/*menus*/
+
 #main, #pause, #gameOver {
     position: fixed;/*ogarnij to*/
 	top: 0;
@@ -93,7 +94,7 @@ h1 {
     pointer-events: auto;
 }
 
-/*buttons*/
+
 button {
     font-family: "Arcade", monospace, Arial;
     font-size: 1.2rem;
@@ -133,6 +134,12 @@ button:active {
     animation: animCount 8s linear ease-in;
     font-size: 10rem;
 }
+
+.fa-pause:hover
+{
+    color: var(--hotmag);
+}
+
 /*blinking for game over sign*/
 @-moz-keyframes blink {
     to {

@@ -3,7 +3,7 @@ var highScore = 0;
 var combo = 1;
 var shownCombo = 1;
 var tn = 0;//czy gra trwa
-var timeLeft = 10;
+var timeLeft = 30;
 var balls = [];
 var particles = [];
 var strokes = [];
@@ -17,7 +17,7 @@ var mouse = {
 }
 var lastTimeHit = -1;
 
-colors = ["#FF1178", "#FE0000", "#FFF205", "#01FFF4", "#7cFF01"];
+colors = ["#FF1178", "#FE0000", "#FFF205", "#01FFF4", "#7cFF01", "#A24CC2", "#58F380", "#D9E716"];
 const playButton =  document.getElementById('start');
 const gameOverButton = document.getElementById('gameOverButton');
 const timer = document.getElementById('timer');
@@ -36,14 +36,14 @@ function hideMenu(menu)
 {
     menu.classList.remove('open');
 }
-/*wyczyść pole gry*/
+
 function finishGame(){
     tn = 0;
     document.getElementById('final-score').innerHTML = `YOUR SCORE: ${score}`;
     showMenu(gameOver);
     hideMenu(stats);
 }
-/*na pozniej*/
+
 
 function showScore ()
 {
@@ -64,7 +64,7 @@ function showScore ()
 function setTimer()
 {
     var minutes = Math.floor(timeLeft/60);
-    timer.innerHTML = `${minutes < 10 ? '0' : ''}${minutes}:${timeLeft-(minutes*60) < 10 ? '0' : ''}${timeLeft-(minutes*60)}`;
+    timer.innerHTML = `<p>${minutes < 10 ? '0' : ''}${minutes}:${timeLeft-(minutes*60) < 10 ? '0' : ''}${timeLeft-(minutes*60)}`;
     var interv = setInterval(() => {
         if(timeLeft == 0) 
         {
@@ -81,10 +81,9 @@ function startGame()
 {   
     score = 0;
     combo = 1;
-    timeLeft = 10;
+    timeLeft = 30;
     tn = 1;
 
-    //.style.cursor = "help";
     showScore();
     hideMenu(main);
     showMenu(stats);
@@ -114,7 +113,7 @@ function countdown()
         countDown.innerHTML = `${counter}`;
     }, 1000);
 }
-//czemu szybkosc sie zwyieksza za druga gra?
+
 class particle
 {
     constructor(x,y, color)
@@ -350,9 +349,6 @@ function renderMouse()
         strokes.shift();
 }
 
-//Game logic
-
-
 showMenu(main);
 playButton.addEventListener('click', () => {
     startGame();
@@ -368,7 +364,7 @@ window.addEventListener('resize', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 })
-//mouse start
+
 var prvX, prvY;
 window.addEventListener('mousemove', (event)=>{
     if(mouse.clicked)
